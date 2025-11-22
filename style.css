@@ -229,6 +229,94 @@ h1 {
     gap: 4rem;
 }
 
+/* --- Experience Section --- */
+.experience-entry {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.experience-entry:last-child {
+    border-bottom: none;
+}
+
+.experience-header {
+    margin-bottom: 1rem;
+}
+
+.job-title {
+    font-family: var(--font-tech);
+    font-size: 1.3rem;
+    color: var(--neon-cyan);
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+}
+
+.job-meta {
+    font-size: 0.95rem;
+    color: rgba(224, 230, 255, 0.7);
+}
+
+.experience-summary {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.experience-launches {
+    margin-bottom: 1.5rem;
+    color: var(--neon-magenta);
+    font-size: 0.95rem;
+}
+
+.experience-launches strong {
+    color: var(--text-light);
+}
+
+.experience-sub {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid rgba(0, 247, 255, 0.3);
+}
+
+.sub-title {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.experience-list {
+    list-style: none;
+    padding: 0;
+}
+
+.experience-list li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+.experience-list li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--neon-cyan);
+}
+
+.experience-awards {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--neon-orange);
+}
+
+.experience-awards strong {
+    color: var(--text-light);
+}
+
 /* --- Responsive adjustments for smaller screens --- */
 @media (max-width: 900px) {
     .hero-section {
