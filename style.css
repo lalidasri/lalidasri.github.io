@@ -353,6 +353,55 @@ h1 {
     color: var(--text-light);
 }
 
+/* --- Contact Section --- */
+.contact-section {
+    text-align: center;
+    padding-bottom: 6rem;
+}
+
+.contact-intro {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 2.5rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text-light);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--neon-cyan);
+}
+
+.social-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
 /* --- Responsive adjustments for smaller screens --- */
 @media (max-width: 900px) {
     .hero-section {
@@ -373,4 +422,8 @@ h1 {
     .carousel-item { flex: 0 0 240px; }
     .carousel-placeholder { height: 150px; }
     .project-section { padding: 1rem; }
+    .social-links { gap: 1.5rem; }
+    .social-link { padding: 1rem; }
+    .social-label { display: none; }
+    .social-icon { width: 28px; height: 28px; }
 }
