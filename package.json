@@ -1,0 +1,27 @@
+{
+  "name": "lalidasri.github.io",
+  "version": "1.0.0",
+  "description": "Lalida's portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d src",
+    "format": "prettier --write src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lalidasri/lalidasri.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lalidasri/lalidasri.github.io/issues"
+  },
+  "homepage": "https://github.com/lalidasri/lalidasri.github.io#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "prettier": "^3.7.1"
+  }
+}
