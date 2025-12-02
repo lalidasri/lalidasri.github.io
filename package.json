@@ -1,0 +1,34 @@
+{
+  "name": "lalidasri.github.io",
+  "version": "1.0.0",
+  "description": "Lalida's portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "serve src",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean && mkdir -p dist",
+    "build": "minify src/index.html > dist/index.html && minify src/style.css > dist/style.css && cp src/portrait.jpeg dist/ && cp -r src/screenshots dist/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist --cname lalida.me",
+    "format": "prettier --write src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lalidasri/lalidasri.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lalidasri/lalidasri.github.io/issues"
+  },
+  "homepage": "https://github.com/lalidasri/lalidasri.github.io#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "minify": "^14.1.0",
+    "prettier": "^3.7.1",
+    "serve": "^14.2.5"
+  }
+}
