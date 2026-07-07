@@ -8,7 +8,7 @@
     "dev": "serve src",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean && mkdir -p dist",
-    "build": "minify src/index.html > dist/index.html && minify src/style.css > dist/style.css && cp src/portrait.jpeg dist/ && cp -r src/screenshots dist/",
+    "build": "minify src/index.html > dist/index.html && minify src/style.css > dist/style.css && cp src/portrait.jpg dist/ && cp -r src/screenshots dist/",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --cname lalida.me",
     "format": "prettier --write src"
