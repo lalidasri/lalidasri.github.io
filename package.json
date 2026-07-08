@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "serve src",
     "clean": "rm -rf dist",
-    "prebuild": "npm run clean && mkdir -p dist",
-    "build": "minify src/index.html > dist/index.html && minify src/style.css > dist/style.css && cp src/portrait.jpg dist/ && cp -r src/screenshots dist/",
+    "build": "node scripts/build.mjs",
+    "build:preview": "PAGECRYPT_PASSWORD=test-password-123 node scripts/build.mjs",
+    "preview": "npm run build:preview && serve dist -l 7086",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --cname lalida.me",
     "format": "prettier --write src"
@@ -28,7 +29,9 @@
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "minify": "^14.1.0",
+    "pagecrypt": "^7.1.0",
     "prettier": "^3.7.1",
-    "serve": "^14.2.5"
+    "serve": "^14.2.5",
+    "sharp": "^0.35.3"
   }
 }

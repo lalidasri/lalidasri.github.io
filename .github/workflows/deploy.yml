@@ -24,7 +24,12 @@ jobs:
 
       - name: Deploy with gh-pages
         run: |
+          if [ -z "${PAGECRYPT_PASSWORD}" ]; then
+            echo "::error::SITE_PASSWORD secret is not set. Add it under Settings → Secrets and variables → Actions."
+            exit 1
+          fi
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAGECRYPT_PASSWORD: ${{ secrets.SITE_PASSWORD }}
