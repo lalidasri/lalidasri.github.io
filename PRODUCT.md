@@ -11,11 +11,11 @@ Two audiences meeting one person:
 - **Parents & content followers** — people who found Lalida through her child-development content on TikTok, Instagram, and YouTube (10K+ following). They want research-grounded, calm, practical help decoding their child's behavior. Context: on a phone, often tired, seeking reassurance from someone credible rather than another opinion.
 - **Teams, hiring leads, and consulting clients** — product and research leaders evaluating Lalida for UX research leadership, consulting, speaking, or mentoring. Context: skimming for proof of senior impact and range. They need to trust fast.
 
-The site's job is to hold both without diluting either: one coherent person — a developmental psychologist and research leader — with two clear doors.
+The site's job is to hold both without diluting either: one coherent person — a child development specialist and research leader — with two clear doors.
 
 ## Product Purpose
 
-A personal home base for Lalida Sritanyaratana positioning her as a **UX Research Lead & Developmental Psychologist**. It carries the throughline that unifies a decade at Google and her current child-development work: *understanding how people actually behave, then shaping things that fit their lives.* Success = a parent trusts her enough to follow and learn; a hiring lead or client trusts her enough to reach out; and neither audience feels the site was built for the other.
+A personal home base for Lalida Sritanyaratana positioning her as a **UX Research Lead & Child Development Specialist**. It carries the throughline that unifies a decade at Google and her current child-development work: *understanding how people actually behave, then shaping things that fit their lives.* Success = a parent trusts her enough to follow and learn; a hiring lead or client trusts her enough to reach out; and neither audience feels the site was built for the other.
 
 Key repositioning captured here (the previous site is out of date): Lalida has concluded 10+ years at Google (Aug 2015 – Jan 2026) and her current lead role is an independent child-development research and education project (Feb 2026 – present). The Google/Waymo/Stanford record becomes deep credibility, not the headline.
 
