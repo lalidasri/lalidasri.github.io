@@ -5,13 +5,14 @@
 //      (so the portrait ships *inside* the encrypted HTML, never as a loose file).
 //   2. Minify the resulting markup (also minifies the inline JS/CSS).
 //   3. Encrypt the whole HTML with pagecrypt using PAGECRYPT_PASSWORD.
-//   4. Copy the *unencrypted* assets (style.css, screenshots/) into dist/.
+//   4. Write the *unencrypted* assets into dist/: style.css (minified), fonts/
+//      (copied), and screenshots/ (compressed to WebP).
 //
 // The PII lives in the HTML, so only index.html is encrypted. The stylesheet and
 // project screenshots are non-sensitive and stay as plain external files that the
 // decrypted page references relatively (style.css, screenshots/...).
 
-import { readFile, writeFile, rm, mkdir, cp } from 'node:fs/promises';
+import { readFile, writeFile, rm, mkdir, cp, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -38,6 +39,11 @@ if (!PASSWORD) {
 const PORTRAIT_WIDTH = 900;
 const PORTRAIT_QUALITY = 82;
 
+// Work screenshots render in a ~300px CSS-wide grid; 900px keeps them crisp at
+// 2x/3x while WebP + resize takes the set from ~1.8MB down to a few hundred KB.
+const SHOT_WIDTH = 900;
+const SHOT_QUALITY = 80;
+
 const kb = (bytes) => `${(bytes / 1024).toFixed(0)}KB`;
 
 async function main() {
@@ -59,6 +65,12 @@ async function main() {
   // Inline the (quoted) data URI before minifying so the minifier keeps it quoted.
   html = html.replace('src="portrait.jpg"', `src="${dataUri}"`);
 
+  // Point screenshot references at their built WebP variants (files written in step 4).
+  html = html.replace(
+    /src="screenshots\/([^"]+)\.(?:png|jpe?g)"/g,
+    'src="screenshots/$1.webp"'
+  );
+
   // 2. Minify markup + inline JS/CSS.
   html = await minify.html(html);
 
@@ -70,10 +82,35 @@ async function main() {
   // 4. Unencrypted assets.
   const css = await minify(path.join(srcDir, 'style.css'));
   await writeFile(path.join(distDir, 'style.css'), css);
-  await cp(path.join(srcDir, 'screenshots'), path.join(distDir, 'screenshots'), {
+
+  // Compress work screenshots to WebP (referenced as .webp in the HTML above).
+  const shotsSrc = path.join(srcDir, 'screenshots');
+  const shotsDist = path.join(distDir, 'screenshots');
+  await mkdir(shotsDist, { recursive: true });
+  let shotsBefore = 0;
+  let shotsAfter = 0;
+  for (const file of await readdir(shotsSrc)) {
+    if (!/\.(png|jpe?g)$/i.test(file)) continue;
+    const input = await readFile(path.join(shotsSrc, file));
+    const out = await sharp(input)
+      .resize({ width: SHOT_WIDTH, withoutEnlargement: true })
+      .webp({ quality: SHOT_QUALITY })
+      .toBuffer();
+    await writeFile(
+      path.join(shotsDist, file.replace(/\.(png|jpe?g)$/i, '.webp')),
+      out
+    );
+    shotsBefore += input.length;
+    shotsAfter += out.length;
+  }
+  console.log(
+    `screenshots/ → WebP (${kb(shotsBefore)} → ${kb(shotsAfter)})`
+  );
+
+  await cp(path.join(srcDir, 'fonts'), path.join(distDir, 'fonts'), {
     recursive: true,
   });
-  console.log('style.css + screenshots/ → copied (unencrypted)');
+  console.log('style.css + fonts/ → copied (unencrypted)');
 
   console.log('\n✓ build complete → dist/');
 }
