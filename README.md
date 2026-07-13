@@ -11,8 +11,9 @@ information lives in the HTML, so the HTML — with the portrait compressed to W
 and inlined — is encrypted client-side at build time. Visitors get a password
 prompt and the page is decrypted in the browser on the correct password.
 
-`style.css` and the project `screenshots/` are non-sensitive and ship as plain,
-unencrypted external files that the decrypted page references normally.
+`style.css`, the self-hosted `fonts/`, and the project `screenshots/` are
+non-sensitive and ship as plain, unencrypted external files that the decrypted
+page references normally.
 
 ## Commands
 
@@ -26,7 +27,20 @@ npm run format    # prettier
 ```
 
 The build pipeline lives in `scripts/build.mjs`: compress + inline the portrait →
-minify → encrypt with pagecrypt → copy `style.css` and `screenshots/` unencrypted.
+minify → encrypt with pagecrypt → ship `style.css` (minified), `fonts/` (copied),
+and `screenshots/` (compressed to WebP) unencrypted.
+
+## Deployment
+
+Deployment is automatic. The GitHub Actions workflow at
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds and
+publishes to GitHub Pages on **every push to `main`** — it runs `npm ci`, builds
+the encrypted `dist/` with the `SITE_PASSWORD` secret, and pushes it to the
+`gh-pages` branch (with the `lalida.me` CNAME). No manual step is needed; just
+push. The job fails loudly if `SITE_PASSWORD` is unset.
+
+`npm run deploy` remains available for a manual publish from your machine
+(requires `PAGECRYPT_PASSWORD` locally).
 
 ## Password handling
 
