@@ -636,14 +636,14 @@ main > section {
   max-width: 48ch;
   color: var(--ink-soft);
 }
-.social-row {
+.contact-links {
   margin-top: 3rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.75rem;
 }
-.social-btn {
+.contact-chip {
   --brand: var(--terracotta-deep);
   display: inline-flex;
   align-items: center;
@@ -662,19 +662,19 @@ main > section {
     color 0.28s var(--ease-out),
     background-color 0.28s var(--ease-out);
 }
-.social-btn svg {
+.contact-chip svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
   transition: transform 0.28s var(--ease-out);
 }
-.social-btn:hover {
+.contact-chip:hover {
   transform: translateY(-3px);
   color: var(--brand);
   border-color: var(--brand);
   background: var(--paper);
 }
-.social-btn:hover svg {
+.contact-chip:hover svg {
   transform: scale(1.08);
 }
 .sb-tiktok {
