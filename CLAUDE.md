@@ -62,7 +62,16 @@ decrypted page before deploying.
   2. Compresses `src/portrait.jpg` to WebP (`sharp`, 900px / q82) and inlines it as a `data:` URI in the HTML
   3. Minifies the HTML markup + inline JS/CSS (`minify` package)
   4. Encrypts the HTML with `pagecrypt` using `PAGECRYPT_PASSWORD` → `dist/index.html`
-  5. Copies `style.css` (minified) and `screenshots/` to `dist/` **unencrypted**
+  5. Re-skins pagecrypt's generic dark unlock prompt to match the site (warm
+     paper/terracotta, Fraunces + Inter) via `themeUnlockPage()` — it swaps the
+     `<title>`, `<style>`, and `<main>` markup while leaving pagecrypt's inline
+     decryption `<script>` and `<pre data-i>` payload untouched, and promotes
+     pagecrypt's derived-key cache from `sessionStorage` to `localStorage` so a
+     successful unlock persists across tab-closes and future visits (a stale key
+     after a password rotation fails to decrypt and is auto-cleared, so the
+     prompt self-heals). It throws if an expected anchor is missing, so a
+     pagecrypt bump can't silently ship the un-themed default page.
+  6. Copies `style.css` (minified) and `screenshots/` to `dist/` **unencrypted**
   - Output goes to `dist/` (git-ignored)
 
 - **How the encryption works at runtime**: `pagecrypt` emits a self-contained page with a password prompt. On the correct password it decrypts the original HTML client-side and `document.write`s it, so the relative `style.css` / `screenshots/…` references resolve normally against the site origin. Only `index.html` (text + portrait) is protected; the stylesheet and screenshots are intentionally public.
